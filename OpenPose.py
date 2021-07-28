@@ -40,7 +40,7 @@ for e in os.listdir(path_origin): #Frontal, Lateral
         shutil.move(path_origin+'/'+e+'/'+j,path_openpose)
         current_path = path_origin+'/'+e+'/'+j
         os.chdir(path_openpose)
-        os.system('bin\OpenPoseDemo.exe --image_dir '+j+' --render_pose 0 --display 0 --write_json keypoints output/')# --render_pose 0')
+        os.system('bin\OpenPoseDemo.exe --image_dir '+j+' --render_pose 0 --display 0 --write_json keypoints output/')
         shutil.move(path_openpose+'/'+j, path_origin+'/'+e)
         os.chdir(path_openpose+'/keypoints')
         for n in os.listdir(path_openpose+'/keypoints'):

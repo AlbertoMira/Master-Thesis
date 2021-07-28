@@ -53,7 +53,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # Train the model
-history=model.fit(X_train, y_train, validation_data=(x_val, y_val), epochs=170)
+history=model.fit(X_train, y_train, validation_data=(x_val, y_val), epochs=100)
 
 # Test the model
 test_loss, test_acc = model.evaluate(X_test,  y_test, verbose=0) # Testing the model
@@ -156,7 +156,7 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-history=model.fit(X_train, y_train, validation_data=(x_val, y_val), epochs=200)
+history=model.fit(X_train, y_train, validation_data=(x_val, y_val), epochs=100)
 test_loss, test_acc = model.evaluate(X_test,  y_test, verbose=0) 
 print('Test accuracy:', test_acc)
 

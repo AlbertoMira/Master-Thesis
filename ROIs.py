@@ -24,7 +24,7 @@ net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)
 
 
-# It is had a folder containing both lateral and frontal CCS videos
+# It is had a folder containing both lateral and frontal XCS videos
 # For every video (lateral and frontal), the ROIs will be obtained
 folder = input("Enter the path of the folder which contains the videos: ")
 
@@ -89,7 +89,7 @@ for e in l: # Frontal, Lateral
                 break
             l_current_frame.append(frame)
 
-            random_angle = (np.random.uniform() - 0.5) * 20 # The angles for the data augmentation will uniformly be [-10, 10)
+            random_angle = (np.random.uniform() - 0.5) * 20 # The angles for the data augmentation will uniformly distributed within the range [-10, 10)
             current_rotated_frame = rotate_image(frame, random_angle)
             l_current_frame.append(current_rotated_frame)
 
@@ -131,13 +131,13 @@ for e in l: # Frontal, Lateral
     
 # Store the output in pickle files
 os.chdir(r'C:\Users\alberto.mira\PycharmProjects\pythonProject')
-#ROIs contains the information related to all ROIs found in a Video
+#ROIs_ contains the information related to all ROIs found in a Video
 ROIs = open('ROIs_.pkl', 'wb')
 pickle.dump(d, ROIs)
 ROIs.close()
 
 
-# Coord contains the information related to the coordinates of all ROIs found in a Video
+# Coord_ contains the information related to the coordinates of all ROIs found in a Video
 coord = open('Coord_.pkl', 'wb')
 pickle.dump(d_coord,coord)
 coord.close()

@@ -1,43 +1,30 @@
+#Imports
 import os
 import json
 import filecmp
 import numpy as np
-
-#os.chdir(r'C:/Users/Albert/Desktop/openpose/')
-#os.system('cd Desktop')
-#a='keypoints'
-#os.system('bin\OpenPoseDemo.exe --image_dir frames --write_json '+a+' output/ --display 0 --render_pose 0')
-#os.system('bin\OpenPoseDemo.exe --image_dir Nueva carpeta --write_json '+a+' output/')
-
-# Open the JSON files
-# with open(r'C:\Users\Albert\Desktop\keypoints\Frontal\Pattern_1\BAIER Konstantin Pattern 1_keypoints.json', 'r') as myfile:
-    #data=myfile.read()
-# obj = json.loads(data)
-# obj=obj['people']
-#d={}
-#d=obj[0]
-#print(d)
-#l=d['pose_keypoints_2d']
-#print(l)
 import pickle
 
+# Dictionaries initialisation
 d={}
 d1={}
 d2={}
 
+# Open the file containing the YOLOv3 coordinates of the final dataset
 pkl_file_2 = open('Final_coords_dataset.pkl', 'rb')
 coord= pickle.load(pkl_file_2)
 pkl_file_2.close()
 
+# Input
 keypoints = input("Enter the path of the folder containing the keypoints from OpenPose: ")
 
+# Here starts the code to create the dataset needed to train the NN models
 os.chdir(keypoints)
 for v in os.listdir(keypoints): #Lateral, Frontal
     os.chdir(keypoints+'/'+v)
     for w in os.listdir(keypoints+'/'+v): # 1,2,3,4,5,6
         os.chdir(keypoints+'/'+v+'/'+w)
         l_matrix=[]
-        #current_pattern = w[len(w) - 1] # 1,2,3,4,5,6
         for n in os.listdir(keypoints+'/'+v+'/'+w):
             with open(keypoints+'/'+v+'/'+w+'/'+n,'r') as myfile:
                 data = myfile.read()
@@ -46,9 +33,9 @@ for v in os.listdir(keypoints): #Lateral, Frontal
             #a=0
 
             current_name = n.split(".")
-            current_name=current_name[0] #Baier Konstantin.2_keypoints
+            current_name=current_name[0]
             current_name=''.join(current_name)
-            current_name=current_name.split() #[Baier, Konstantin=2_keypoints]
+            current_name=current_name.split()
             #Get surname
             current_name_1=current_name[0]
 
@@ -70,7 +57,7 @@ for v in os.listdir(keypoints): #Lateral, Frontal
             coord_2 = coord_2[current_name] # Get the either the lateral or frontal coordinates of an athlete
             coord_2 = coord_2[w] # Get the list of coordinates of a single pattern
 
-            if len(obj) > 1:
+            if len(obj) > 1: # If there is more than one skeleton detected, then this code will choose the right one (the athlete's one)
                 l = []
                 for e in obj:
                     for x in e:
@@ -108,8 +95,6 @@ for v in os.listdir(keypoints): #Lateral, Frontal
                     l_sum = []  # Store the sum of the current skeleton
                     i = 0
                     sum = 0
-                    # print(no_0,no_1,no_2,no_3, no_4, no_5, no_6, no_7, no_8, no_9, no_10, no_11, no_12, no_13, no_14, no_15, no_16, no_17, no_18, no_19, no_20, no_21, no_22, no_23, no_24)
-                    # pers = 0
                     while i < len(e):
                         if i == 0:
                             if e[i + 1] == 0:
@@ -346,10 +331,10 @@ for v in os.listdir(keypoints): #Lateral, Frontal
     d2[v]=d1
     d1={}
 
-
+# Store the dataset
 os.chdir(r'C:\Users\alberto.mira\PycharmProjects\pythonProject')
-colab = open('COLAB_ahora.pkl', 'wb')
-pickle.dump(d2, colab)
+final_dataset = open('Final_dataset.pkl', 'wb')
+pickle.dump(d2, final_dataset)
 colab.close()
 
 

@@ -1,6 +1,9 @@
+# Imports
 import cv2 as cv
 import os
 import pickle
+
+# Input
 path = input("Enter the path of the folder containing the already-given patterns: ")
 os.chdir(path)
 d={}
@@ -11,6 +14,7 @@ d4={}
 d5={}
 d6={}
 l=[]
+# Go through the given patterns
 for e in os.listdir(path):
     os.chdir(path+'/'+e)
     for im in os.listdir(path+'/'+e):
@@ -19,7 +23,7 @@ for e in os.listdir(path):
         frame=im1[1]
         frame=frame[2]
         l.append(name)
-        if frame =='1':
+        if frame =='1': # Patterns will be stored according to the frame they are related to
             try:
                 img=cv.imread(path+'/'+e+'/'+im)
                 img=cv.resize(img, (350,450))
@@ -58,9 +62,9 @@ for e in os.listdir(path):
 
     for j in l:
         try:
-            l_dict=[]
-            if len(d1[j])>0 and len(d2[j]>0) and len(d3[j]>0) and len(d4[j]>0) and len(d5[j]>0):
-                l_dict.append(d1[j])
+            l_dict=[] 
+            if len(d1[j])>0 and len(d2[j]>0) and len(d3[j]>0) and len(d4[j]>0) and len(d5[j]>0): # Only completely filled dicionaries will be stored
+                l_dict.append(d1[j]) 
                 l_dict.append(d2[j])
                 l_dict.append(d3[j])
                 l_dict.append(d4[j])
@@ -82,7 +86,7 @@ for e in os.listdir(path):
 
 
 
-#Given patterns contains the information related to the already-given patterns
+#Given patterns contains the information related to the already-given patterns. In this project, the technique analysed is Skating 1-1.
 given_patterns = open('Skating_1_1_given_patterns.pkl', 'wb')
 pickle.dump(d, given_patterns)
 given_patterns.close()

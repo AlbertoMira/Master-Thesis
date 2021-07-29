@@ -35,7 +35,7 @@ except:
 
 
     
-# Write the ROIs will OpenCV. This way, it will be easier to analyse them afterwards by OpenPose
+# Write the ROIs with OpenCV. This way, it will be easier to analyse them afterwards by OpenPose
 for e in final_dataset:
     a=final_dataset[e]
     for j in a:

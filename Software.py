@@ -427,8 +427,8 @@ for e in d_data: #Lateral,  frontal
                 l1.append((float(a1), k[1]))  # These lists contain all the probabilities of a single athlete in either a lateral or a frontal video
                 l2.append((float(a2), k[1]))
                 l3.append((float(a3), k[1]))
-                l4.append((float(a3), k[1]))
-                l5.append((float(a4), k[1]))
+                l4.append((float(a4), k[1]))
+                l5.append((float(a5), k[1]))
 
         probs_1 = [item[0] for item in l1]
         probs_2 = [item[0] for item in l2]

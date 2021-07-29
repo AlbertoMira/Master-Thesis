@@ -20,7 +20,7 @@ net = cv.dnn.readNetFromDarknet(model_cfg, model_weights)
 net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)
 
-# We have got a folder containing both lateral and frontal XCS videos
+# It is had a folder containing both lateral and frontal XCS videos
 # For every video (lateral and frontal), the ROIs will be obtained
 
 
@@ -489,7 +489,6 @@ for e in d_data: #Lateral,  frontal
 
             l_peaks = sorted(l_peaks, key=itemgetter(0))
 
-            print(l_peaks)
 
             counter1 = 0
             counter2 = 0
